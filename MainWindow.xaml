@@ -6,34 +6,42 @@
         xmlns:local="clr-namespace:VerteMarkPackager"
         mc:Ignorable="d"
         Title="VerteMarkPackager" Height="450" Width="800">
-    <Grid Margin="128,20,128,20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto" MinWidth="105"/>
-        </Grid.ColumnDefinitions>
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Nápověda" Click="HelpMenuItem_Click"/>
+            <MenuItem Header="Informace" Click="InfoMenuItem_Click"/>
+        </Menu>
+        <Grid Margin="128,20,128,20" Height="388">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" MinWidth="105"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Center" FontSize="30" Grid.ColumnSpan="2">VerteMark Packager</TextBlock>
+            <!-- DICOM Files Directory Selection -->
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="16">Vybrat adresář s dicom soubory:</TextBlock>
+            <TextBox x:Name="DicomFilesDirectoryTextBox" Grid.Row="1" Grid.Column="0" Margin="49,0,10,0" VerticalAlignment="Center" Height="18"/>
+            <Button Grid.Column="1" Margin="10,0,0,0" Grid.Row="1" Content="Procházet" VerticalAlignment="Center" Click="OnBrowseDicomFilesDirectory" Height="20"/>
 
-        <!-- DICOM Files Directory Selection -->
-        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="16">Vybrat adresář s dicom soubory:</TextBlock>
-        <TextBox x:Name="DicomFilesDirectoryTextBox" Grid.Column="0" Margin="49,0,10,0" VerticalAlignment="Center" Height="18"/>
-        <Button Grid.Column="1" Margin="10,0,0,0" Content="Procházet" VerticalAlignment="Center" Click="OnBrowseDicomFilesDirectory" Height="20"/>
+            <!-- Save Directory Selection -->
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Height="16">Vybrat adresář pro uložení:</TextBlock>
+            <TextBox x:Name="SaveDirectoryTextBox" Grid.Row="2" Grid.Column="0" Margin="49,0,10,0" VerticalAlignment="Center" Height="18"/>
+            <Button Grid.Row="2" Grid.Column="1" Margin="10,0,0,28" Content="Procházet" VerticalAlignment="Bottom" Click="OnBrowseSaveDirectory" Height="20"/>
 
-        <!-- Save Directory Selection -->
-        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="16">Vybrat adresář pro uložení:</TextBlock>
-        <TextBox x:Name="SaveDirectoryTextBox" Grid.Row="1" Grid.Column="0" Margin="49,0,10,0" VerticalAlignment="Center" Height="18"/>
-        <Button Grid.Row="1" Grid.Column="1" Margin="10,0,0,28" Content="Procházet" VerticalAlignment="Bottom" Click="OnBrowseSaveDirectory" Height="20"/>
+            <!-- DICOM Files Count Slider -->
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Height="16">Počet dicom souborů ve složce:</TextBlock>
+            <Slider x:Name="DicomFilesCountSlider" Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="30" Value="15" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" Margin="49,0,10,0" ValueChanged="DicomFilesCountSlider_ValueChanged" Height="18"/>
+            <TextBox x:Name="DicomFilesCountTextBox" Grid.Row="3" Grid.Column="1" Margin="16,0,6,0" VerticalAlignment="Center" Text="15" TextChanged="OnDicomFilesCountTextChanged" Height="18"/>
 
-        <!-- DICOM Files Count Slider -->
-        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Height="16">Počet dicom souborů ve složce:</TextBlock>
-        <Slider x:Name="DicomFilesCountSlider" Grid.Row="2" Grid.Column="0" Minimum="0" Maximum="30" Value="15" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" Margin="49,0,10,0" ValueChanged="DicomFilesCountSlider_ValueChanged" Height="18"/>
-        <TextBox x:Name="DicomFilesCountTextBox" Grid.Row="2" Grid.Column="1" Margin="16,0,6,0" VerticalAlignment="Center" Text="15" TextChanged="OnDicomFilesCountTextChanged" Height="18"/>
-
-        <!-- Create Button -->
-        <Button Grid.Row="3" Grid.Column="0" Content="Vytvořit!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="105,0,0,0" Click="OnCreateButtonClick" Height="20"/>
-    </Grid>
+            <!-- Create Button -->
+            <Button Grid.Row="4" Grid.Column="0" Content="Vytvořit!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="105,0,0,0" Click="OnCreateButtonClick" Height="20"/>
+        </Grid>
+    </DockPanel>
 </Window>

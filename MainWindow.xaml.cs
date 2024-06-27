@@ -70,5 +70,26 @@ namespace VerteMarkPackager {
 				System.Windows.MessageBox.Show("Vytvoření úspěšné!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 		}
+
+		private void HelpMenuItem_Click(object sender, RoutedEventArgs e) {
+			string helpText = "1. Vyberte adresář (složku), kde se nachází všechny dicom soubory ke zpracování.\n\n" +
+							  "2. Vyberte adresář, kde se vytvoří složka s názvem 'VerteMarkPack' se všemi vytvořenými soubory \".vmk\".\n\n" +
+							  "3. Zvolte, po kolika dicom souborech se budou tvořit jednotlivé soubory \".vmk\" (kolik souborů bude uvnitř). Pro vytvoření pouze jednoho souboru zvolte počet \"0\".\n\n" +
+							  "4. Tlačítkem \"Vytvořit\" spustíte tvoření projektových souborů. Upozornění: Vytváření může při větším počtu dicom souborů chvilku trvat.";
+			System.Windows.MessageBox.Show(helpText, "Nápověda", MessageBoxButton.OK, MessageBoxImage.Question);
+		}
+
+		private void InfoMenuItem_Click(object sender, RoutedEventArgs e) {
+			string infoText = "Tato aplikace slouží pro vytvoření souborů se správnou strukturou a koncovkou pro správné pracování aplikace VerteMark.\n\n" +
+										 "Z adresáře, kde se nacházejí soubory typu \"Dicom\" vytvoří soubory pro aplikaci VerteMark obsahující určitý počet souborů \"Dicom\". " +
+										 "Tyto vytvořené soubory se uloží v nové složce s názvem 'VerteMarkPack' v adresáři, který si uživatel zvolí.\n\n" +
+										 "V případě chyb, nesprávné práce aplikace nebo podrobnější nápovědy, prosím kontaktujte vývojáře této aplikace skrze email: schonf.alex@gmail.com.";
+			System.Windows.MessageBox.Show(infoText, "Informace", MessageBoxButton.OK, MessageBoxImage.Information);
+		}
+
+		/*========================================================
+		BACKEND
+		========================================================*/
+
 	}
 }
