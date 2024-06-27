@@ -16,12 +16,21 @@ using FellowOakDicom;
 using FellowOakDicom.IO;
 using System;
 using System.Diagnostics;
+using System.IO.Compression;
 
 namespace VerteMarkPackager {
+
+
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
+	/// 
 	public partial class MainWindow : Window {
+
+		string? savePath;
+		string? folderPath;
+		int? count;
+
 		public MainWindow() {
 			InitializeComponent();
 		}
@@ -112,6 +121,7 @@ namespace VerteMarkPackager {
 		========================================================*/
 
 		private int Start() {
+			count = Convert.ToInt32(DicomFilesCountSlider.Value);
 			if (!CheckFolder(SaveDirectoryTextBox.Text) && !CheckFolder(DicomFilesDirectoryTextBox.Text)) {
 				return 1;
 			}
@@ -119,23 +129,63 @@ namespace VerteMarkPackager {
 				return 2;
 			}
 
+			CreateFolder();
+			CreateDicomZips();
 
 			return 0;
 		}
 
+		void CreateFolder() {
+			folderPath = DicomFilesDirectoryTextBox.Text;
+			savePath = SaveDirectoryTextBox.Text + "/VerteMarkPack";
+			Directory.CreateDirectory(savePath);
+		}
 
+		void CreateDicomZips() {
+			var dicomFiles = Directory.GetFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly);
+
+			int fileIndex = 0;
+			int zipIndex = 0;
+			if (count == 0) {
+				count = dicomFiles.Length;
+			}
+
+			while (fileIndex < dicomFiles.Length) {
+				string date = DateTime.Now.ToString("ddMMyy");
+				string zipFileName = System.IO.Path.Combine(savePath, $"{date}_{zipIndex + 1}.vmk");
+
+				using (var zipStream = new FileStream(zipFileName, FileMode.Create))
+				using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, true)) {
+					string dicomsFolderInZip = "dicoms/";
+
+					for (int i = 0; i < count && fileIndex < dicomFiles.Length; i++, fileIndex++) {
+						string dicomFilePath = dicomFiles[fileIndex];
+						string dicomFileName = System.IO.Path.GetFileName(dicomFilePath);
+
+						var entry = archive.CreateEntry(dicomsFolderInZip + dicomFileName);
+						using (var entryStream = entry.Open())
+						using (var fileStream = new FileStream(dicomFilePath, FileMode.Open, FileAccess.Read)) {
+							fileStream.CopyTo(entryStream);
+						}
+					}
+				}
+				zipIndex++;
+			}
+		}
 
 
 
 		// CHECKING
 		private bool CheckFolder(string path) {
-			return Directory.Exists(path);
+			if (Directory.Exists(path)){
+				return true;
+			}
+			return false;
 		}
 
 		private bool CheckDicoms() {
 			var files = Directory.GetFiles(DicomFilesDirectoryTextBox.Text);
 
-			// Iterace přes každý soubor a kontrola, zda je to DICOM soubor
 			foreach (var file in files) {
 				// Kontrola hlavičky souboru
 				if (IsDicomFile(file)) {
