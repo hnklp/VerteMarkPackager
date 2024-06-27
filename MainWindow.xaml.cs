@@ -10,7 +10,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms; // Required for FolderBrowserDialog
+using System.Windows.Forms;
+using System.IO; // Required for FolderBrowserDialog
+using FellowOakDicom;
+using FellowOakDicom.IO;
+using System;
+using System.Diagnostics;
 
 namespace VerteMarkPackager {
 	/// <summary>
@@ -61,13 +66,28 @@ namespace VerteMarkPackager {
 			}
 		}
 
-
+		/// <summary>
+		/// Spuštění backendu
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OnCreateButtonClick(object sender, RoutedEventArgs e) {
 			if (!int.TryParse(DicomFilesCountTextBox.Text, out int value)) {
 				System.Windows.MessageBox.Show($"Prosím, vyberte hodnotu pouze mezi {DicomFilesCountSlider.Minimum} a {DicomFilesCountSlider.Maximum}. Pro neomezený výběr zvolte hodnotu 0.", "Chybná hodnota", MessageBoxButton.OK, MessageBoxImage.Warning);
 			}
 			else {
-				System.Windows.MessageBox.Show("Vytvoření úspěšné!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+				int done = Start();
+				switch (done) {
+					case 0:
+						System.Windows.MessageBox.Show("Vytvoření úspěšné!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+						break;
+					case 1:
+						System.Windows.MessageBox.Show("Vybrané adresáře neexistují! Prosím, vyberte existující adresáře.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+						break;
+					case 2:
+						System.Windows.MessageBox.Show("Ve vybraném adresáři nejsou žádné soubory dicom.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+						break;
+				}
 			}
 		}
 
@@ -91,5 +111,48 @@ namespace VerteMarkPackager {
 		BACKEND
 		========================================================*/
 
+		private int Start() {
+			if (!CheckFolder(SaveDirectoryTextBox.Text) && !CheckFolder(DicomFilesDirectoryTextBox.Text)) {
+				return 1;
+			}
+			if (!CheckDicoms()) {
+				return 2;
+			}
+
+
+			return 0;
+		}
+
+
+
+
+
+		// CHECKING
+		private bool CheckFolder(string path) {
+			return Directory.Exists(path);
+		}
+
+		private bool CheckDicoms() {
+			var files = Directory.GetFiles(DicomFilesDirectoryTextBox.Text);
+
+			// Iterace přes každý soubor a kontrola, zda je to DICOM soubor
+			foreach (var file in files) {
+				// Kontrola hlavičky souboru
+				if (IsDicomFile(file)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private bool IsDicomFile(string filePath) {
+			try {
+				DicomFile dicomFile = DicomFile.Open(filePath);
+				return dicomFile != null && dicomFile.Dataset != null && dicomFile.Dataset.Contains(DicomTag.SOPClassUID);
+			}
+			catch {
+				return false;
+			}
+		}
 	}
 }
