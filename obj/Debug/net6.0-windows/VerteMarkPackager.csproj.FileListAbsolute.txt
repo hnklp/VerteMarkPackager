@@ -18,3 +18,4 @@ C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0-windows\VerteMarkPackager.pdb
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0-windows\VerteMarkPackager.genruntimeconfig.cache
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0-windows\ref\VerteMarkPackager.dll
+C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0-windows\VerteMarkPackager.sourcelink.json

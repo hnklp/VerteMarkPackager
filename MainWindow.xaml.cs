@@ -24,7 +24,7 @@ namespace VerteMarkPackager {
 		private void OnBrowseDicomFilesDirectory(object sender, RoutedEventArgs e) {
 			using (var folderBrowser = new FolderBrowserDialog()) {
 				folderBrowser.Description = "Vyberte složku s DICOM soubory";
-				folderBrowser.ShowNewFolderButton = false; // Only existing folders can be selected
+				folderBrowser.ShowNewFolderButton = false;
 
 				if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
 					DicomFilesDirectoryTextBox.Text = folderBrowser.SelectedPath;
@@ -35,7 +35,7 @@ namespace VerteMarkPackager {
 		private void OnBrowseSaveDirectory(object sender, RoutedEventArgs e) {
 			using (var folderBrowser = new FolderBrowserDialog()) {
 				folderBrowser.Description = "Vyberte složku pro uložení";
-				folderBrowser.ShowNewFolderButton = true; // Allow creating new folders if needed
+				folderBrowser.ShowNewFolderButton = true;
 
 				if (folderBrowser.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
 					SaveDirectoryTextBox.Text = folderBrowser.SelectedPath;
@@ -44,15 +44,31 @@ namespace VerteMarkPackager {
 		}
 
 		private void DicomFilesCountSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-
+			if (DicomFilesCountTextBox != null) {
+				DicomFilesCountTextBox.Text = DicomFilesCountSlider.Value.ToString("F0");
+			}
 		}
+
 
 		private void OnDicomFilesCountTextChanged(object sender, TextChangedEventArgs e) {
-
+			if (int.TryParse(DicomFilesCountTextBox.Text, out int value)) {
+				if (value >= DicomFilesCountSlider.Minimum && value <= DicomFilesCountSlider.Maximum) {
+					DicomFilesCountSlider.Value = value;
+				}
+				else {
+					System.Windows.MessageBox.Show($"Prosím, vyberte hodnotu pouze mezi {DicomFilesCountSlider.Minimum} a {DicomFilesCountSlider.Maximum}. Pro neomezený výběr zvolte hodnotu 0.", "Chybná hodnota", MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
+			}
 		}
 
-		private void OnCreateButtonClick(object sender, RoutedEventArgs e) {
 
+		private void OnCreateButtonClick(object sender, RoutedEventArgs e) {
+			if (!int.TryParse(DicomFilesCountTextBox.Text, out int value)) {
+				System.Windows.MessageBox.Show($"Prosím, vyberte hodnotu pouze mezi {DicomFilesCountSlider.Minimum} a {DicomFilesCountSlider.Maximum}. Pro neomezený výběr zvolte hodnotu 0.", "Chybná hodnota", MessageBoxButton.OK, MessageBoxImage.Warning);
+			}
+			else {
+				System.Windows.MessageBox.Show("Vytvoření úspěšné!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
 		}
 	}
 }

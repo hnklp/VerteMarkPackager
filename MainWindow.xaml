@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VerteMarkPackager"
         mc:Ignorable="d"
         Title="VerteMarkPackager" Height="450" Width="800">
-    <Grid Margin="81,20,82,20">
+    <Grid Margin="128,20,128,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
@@ -30,8 +30,8 @@
 
         <!-- DICOM Files Count Slider -->
         <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Height="16">Počet dicom souborů ve složce:</TextBlock>
-        <Slider x:Name="DicomFilesCountSlider" Grid.Row="2" Grid.Column="0" Minimum="0" Maximum="100" Value="20" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" Margin="49,0,10,0" ValueChanged="DicomFilesCountSlider_ValueChanged" Height="18"/>
-        <TextBox x:Name="DicomFilesCountTextBox" Grid.Row="2" Grid.Column="1" Margin="16,0,6,0" VerticalAlignment="Center" Text="20" TextChanged="OnDicomFilesCountTextChanged" Height="18"/>
+        <Slider x:Name="DicomFilesCountSlider" Grid.Row="2" Grid.Column="0" Minimum="0" Maximum="30" Value="15" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" Margin="49,0,10,0" ValueChanged="DicomFilesCountSlider_ValueChanged" Height="18"/>
+        <TextBox x:Name="DicomFilesCountTextBox" Grid.Row="2" Grid.Column="1" Margin="16,0,6,0" VerticalAlignment="Center" Text="15" TextChanged="OnDicomFilesCountTextChanged" Height="18"/>
 
         <!-- Create Button -->
         <Button Grid.Row="3" Grid.Column="0" Content="Vytvořit!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="105,0,0,0" Click="OnCreateButtonClick" Height="20"/>
