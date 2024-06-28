@@ -19,6 +19,8 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <!-- Row for ProgressBar -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -39,9 +41,11 @@
             <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Height="16">Počet dicom souborů ve složce:</TextBlock>
             <Slider x:Name="DicomFilesCountSlider" Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="30" Value="15" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" Margin="49,0,10,0" ValueChanged="DicomFilesCountSlider_ValueChanged" Height="18"/>
             <TextBox x:Name="DicomFilesCountTextBox" Grid.Row="3" Grid.Column="1" Margin="16,0,6,0" VerticalAlignment="Center" Text="15" TextChanged="OnDicomFilesCountTextChanged" Height="18"/>
-
             <!-- Create Button -->
-            <Button Grid.Row="4" Grid.Column="0" Content="Vytvořit!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="105,0,0,0" Click="OnCreateButtonClick" Height="20"/>
+            <Button x:Name="CreateButton" Grid.Row="4" Grid.Column="0" Content="Vytvořit!" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="105,0,0,0" Click="OnCreateButtonClick" Height="20"/>
+
+            <!-- ProgressBar -->
+            <ProgressBar x:Name="ProgressBar" Grid.Row="4" Grid.Column="0" Margin="100,0,0,0" Height="20" Minimum="0" Maximum="100" Visibility="Collapsed"/>
         </Grid>
     </DockPanel>
 </Window>

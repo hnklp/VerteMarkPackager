@@ -1,29 +1,13 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using System.IO; // Required for FolderBrowserDialog
-using FellowOakDicom;
-using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip;
-using System.Diagnostics;
+using FellowOakDicom;
 
 namespace VerteMarkPackager {
-
-
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	/// 
 	public partial class MainWindow : Window {
 
 		string? savePath;
@@ -62,7 +46,6 @@ namespace VerteMarkPackager {
 			}
 		}
 
-
 		private void OnDicomFilesCountTextChanged(object sender, TextChangedEventArgs e) {
 			if (int.TryParse(DicomFilesCountTextBox.Text, out int value)) {
 				if (value >= DicomFilesCountSlider.Minimum && value <= DicomFilesCountSlider.Maximum) {
@@ -74,18 +57,18 @@ namespace VerteMarkPackager {
 			}
 		}
 
-		/// <summary>
-		/// Spuštění backendu
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void OnCreateButtonClick(object sender, RoutedEventArgs e) {
+		private async void OnCreateButtonClick(object sender, RoutedEventArgs e) {
+			// Hide the CreateButton
+			CreateButton.Visibility = Visibility.Collapsed;
+
 			if (!int.TryParse(DicomFilesCountTextBox.Text, out int value)) {
 				System.Windows.MessageBox.Show($"Prosím, vyberte hodnotu pouze mezi {DicomFilesCountSlider.Minimum} a {DicomFilesCountSlider.Maximum}. Pro neomezený výběr zvolte hodnotu 0.", "Chybná hodnota", MessageBoxButton.OK, MessageBoxImage.Warning);
+				// Show the CreateButton again on error
+				CreateButton.Visibility = Visibility.Visible;
 			}
 			else {
-				int done = Start();
-				switch (done) {
+				int result = await StartAsync();
+				switch (result) {
 					case 0:
 						System.Windows.MessageBox.Show("Vytvoření úspěšné!", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
 						break;
@@ -97,7 +80,9 @@ namespace VerteMarkPackager {
 						break;
 				}
 			}
+			CreateButton.Visibility = Visibility.Visible;
 		}
+
 
 		private void HelpMenuItem_Click(object sender, RoutedEventArgs e) {
 			string helpText = "1. Vyberte adresář (složku), kde se nachází všechny dicom soubory ke zpracování.\n\n" +
@@ -115,94 +100,111 @@ namespace VerteMarkPackager {
 			System.Windows.MessageBox.Show(infoText, "Informace", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
+		private void UpdateProgress(int percentage) {
+			Dispatcher.Invoke(() => {
+				ProgressBar.Value = percentage;
+				if (ProgressBar.Visibility == Visibility.Collapsed) {
+					ProgressBar.Visibility = Visibility.Visible;
+				}
+			});
+		}
+
 		/*========================================================
 		BACKEND
 		========================================================*/
 
-		private int Start() {
+		private async Task<int> StartAsync() {
 			count = Convert.ToInt32(DicomFilesCountSlider.Value);
-			if (!CheckFolder(SaveDirectoryTextBox.Text) && !CheckFolder(DicomFilesDirectoryTextBox.Text)) {
+
+			// Check directories existence
+			if (!CheckFolder(SaveDirectoryTextBox.Text) || !CheckFolder(DicomFilesDirectoryTextBox.Text)) {
 				return 1;
 			}
+
+			// Check if DICOM files exist in the folder
 			if (!CheckDicoms()) {
 				return 2;
 			}
 
 			CreateFolder();
-			CreateDicomZips();
+
+			// Run the zipping process in the background
+			await Task.Run(() => CreateDicomZips(UpdateProgress));
+
+			ProgressBar.Visibility = Visibility.Collapsed;
 
 			return 0;
 		}
 
-		void CreateFolder() {
+		private void CreateFolder() {
 			folderPath = DicomFilesDirectoryTextBox.Text;
-			savePath = SaveDirectoryTextBox.Text + "/VerteMarkPack";
+			savePath = Path.Combine(SaveDirectoryTextBox.Text, "VerteMarkPack");
 			Directory.CreateDirectory(savePath);
 		}
 
-		void CreateDicomZips(){
+		private void CreateDicomZips(Action<int> reportProgress) {
 			var dicomFiles = Directory.GetFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly);
-
 			int fileIndex = 0;
 			int zipIndex = 0;
+			int totalFiles = dicomFiles.Length;
 
+			// If count is set to 0, include all files in one ZIP
 			if (count == 0) {
-				count = dicomFiles.Length;
+				count = totalFiles;
 			}
 
 			while (fileIndex < dicomFiles.Length) {
 				string date = DateTime.Now.ToString("ddMMyy");
-				string zipFileName = System.IO.Path.Combine(savePath, $"{date}_{zipIndex + 1}.vmk");
+				string zipFileName = Path.Combine(savePath, $"{date}_{zipIndex + 1}.vmk");
 
-				// Použití SharpZipLib pro vytvoření ZIP souboru
+				// Creating ZIP file with SharpZipLib
 				using (var zipStream = new FileStream(zipFileName, FileMode.Create))
 				using (var zipWriter = new ZipOutputStream(zipStream)) {
-					zipWriter.SetLevel(0); // Nastavení úrovně komprese na 0 (bez komprese)
+					zipWriter.SetLevel(0); // Set compression level to 0 (no compression)
 
 					string dicomsFolderInZip = "dicoms/";
 
 					for (int i = 0; i < count && fileIndex < dicomFiles.Length; i++, fileIndex++) {
 						string dicomFilePath = dicomFiles[fileIndex];
-						string dicomFileName = System.IO.Path.GetFileName(dicomFilePath);
+						string dicomFileName = Path.GetFileName(dicomFilePath);
 						string entryName = dicomsFolderInZip + dicomFileName;
 
-						// Přidání souboru do ZIP archivu bez komprese
+						// Adding file to ZIP without compression
 						var entry = new ZipEntry(entryName) {
 							DateTime = DateTime.Now,
 							Size = new FileInfo(dicomFilePath).Length,
-							CompressionMethod = CompressionMethod.Stored // Bez komprese
+							CompressionMethod = CompressionMethod.Stored // No compression
 						};
 
 						zipWriter.PutNextEntry(entry);
 
-						// Kopírování souboru do ZIP archivu
+						// Copying file into ZIP archive
 						using (var fileStream = new FileStream(dicomFilePath, FileMode.Open, FileAccess.Read)) {
 							fileStream.CopyTo(zipWriter);
 						}
 
 						zipWriter.CloseEntry();
+
+						// Report progress
+						int progressPercentage = (int)((fileIndex / (double)totalFiles) * 100);
+						reportProgress(progressPercentage);
 					}
 				}
 
 				zipIndex++;
 			}
+
+			// Ensure progress reaches 100% at the end
+			reportProgress(100);
 		}
 
-
-
-		// CHECKING
 		private bool CheckFolder(string path) {
-			if (Directory.Exists(path)){
-				return true;
-			}
-			return false;
+			return Directory.Exists(path);
 		}
 
 		private bool CheckDicoms() {
 			var files = Directory.GetFiles(DicomFilesDirectoryTextBox.Text);
-
 			foreach (var file in files) {
-				// Kontrola hlavičky souboru
 				if (IsDicomFile(file)) {
 					return true;
 				}
