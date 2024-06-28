@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "VerteMarkPackager/1.0.0": {
         "dependencies": {
+          "SharpZipLib": "1.4.2",
           "fo-dicom": "5.1.2",
           "fo-dicom.Desktop": "4.0.8",
           "fo-dicom.NetCore": "4.0.8"
@@ -316,6 +317,14 @@
             "rid": "win7-x86",
             "assetType": "native",
             "fileVersion": "1.0.24628.0"
+          }
+        }
+      },
+      "SharpZipLib/1.4.2": {
+        "runtime": {
+          "lib/net6.0/ICSharpCode.SharpZipLib.dll": {
+            "assemblyVersion": "1.4.2.13",
+            "fileVersion": "1.4.2.13"
           }
         }
       },
@@ -1410,6 +1419,13 @@
       "sha512": "sha512-4cXRTIcttvIreAoqK/5hzTtzepeggac+m5A0rzH+9zLtnFh2J0rLuGeJR4KjNLyKqPzO0kjqrs5lkRJEKX8HAA==",
       "path": "runtime.win7-x86.runtime.native.system.data.sqlclient.sni/4.3.0",
       "hashPath": "runtime.win7-x86.runtime.native.system.data.sqlclient.sni.4.3.0.nupkg.sha512"
+    },
+    "SharpZipLib/1.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yjj+3zgz8zgXpiiC3ZdF/iyTBbz2fFvMxZFEBPUcwZjIvXOf37Ylm+K58hqMfIBt5JgU/Z2uoUS67JmTLe973A==",
+      "path": "sharpziplib/1.4.2",
+      "hashPath": "sharpziplib.1.4.2.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

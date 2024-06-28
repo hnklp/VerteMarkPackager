@@ -13,10 +13,9 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.IO; // Required for FolderBrowserDialog
 using FellowOakDicom;
-using FellowOakDicom.IO;
-using System;
-using System.Diagnostics;
 using System.IO.Compression;
+using ICSharpCode.SharpZipLib.Zip;
+using System.Diagnostics;
 
 namespace VerteMarkPackager {
 
@@ -141,11 +140,12 @@ namespace VerteMarkPackager {
 			Directory.CreateDirectory(savePath);
 		}
 
-		void CreateDicomZips() {
+		void CreateDicomZips(){
 			var dicomFiles = Directory.GetFiles(folderPath, "*.*", SearchOption.TopDirectoryOnly);
 
 			int fileIndex = 0;
 			int zipIndex = 0;
+
 			if (count == 0) {
 				count = dicomFiles.Length;
 			}
@@ -154,21 +154,36 @@ namespace VerteMarkPackager {
 				string date = DateTime.Now.ToString("ddMMyy");
 				string zipFileName = System.IO.Path.Combine(savePath, $"{date}_{zipIndex + 1}.vmk");
 
+				// Použití SharpZipLib pro vytvoření ZIP souboru
 				using (var zipStream = new FileStream(zipFileName, FileMode.Create))
-				using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, true)) {
+				using (var zipWriter = new ZipOutputStream(zipStream)) {
+					zipWriter.SetLevel(0); // Nastavení úrovně komprese na 0 (bez komprese)
+
 					string dicomsFolderInZip = "dicoms/";
 
 					for (int i = 0; i < count && fileIndex < dicomFiles.Length; i++, fileIndex++) {
 						string dicomFilePath = dicomFiles[fileIndex];
 						string dicomFileName = System.IO.Path.GetFileName(dicomFilePath);
+						string entryName = dicomsFolderInZip + dicomFileName;
 
-						var entry = archive.CreateEntry(dicomsFolderInZip + dicomFileName);
-						using (var entryStream = entry.Open())
+						// Přidání souboru do ZIP archivu bez komprese
+						var entry = new ZipEntry(entryName) {
+							DateTime = DateTime.Now,
+							Size = new FileInfo(dicomFilePath).Length,
+							CompressionMethod = CompressionMethod.Stored // Bez komprese
+						};
+
+						zipWriter.PutNextEntry(entry);
+
+						// Kopírování souboru do ZIP archivu
 						using (var fileStream = new FileStream(dicomFilePath, FileMode.Open, FileAccess.Read)) {
-							fileStream.CopyTo(entryStream);
+							fileStream.CopyTo(zipWriter);
 						}
+
+						zipWriter.CloseEntry();
 					}
 				}
+
 				zipIndex++;
 			}
 		}

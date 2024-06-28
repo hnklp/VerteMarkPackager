@@ -40,3 +40,4 @@ C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\bin\Debug\net6.0
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\bin\Debug\net6.0-windows\runtimes\win7-x86\native\sni.dll
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\bin\Debug\net6.0-windows\runtimes\unix\lib\netstandard1.3\System.Data.SqlClient.dll
 C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\bin\Debug\net6.0-windows\runtimes\win\lib\netstandard1.3\System.Data.SqlClient.dll
+C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\bin\Debug\net6.0-windows\ICSharpCode.SharpZipLib.dll

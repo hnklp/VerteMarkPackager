@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+DTwqx2fALUPKlbLiUcpLWw+aXshbelKMJdFSWDZGaG3obxVJvYdLa54sAj9EzQbsV65XUuyxbRimHV2jqED/g==",
+  "dgSpecHash": "bEiKRAX1xLe/9HpkEmaDZRSaLnN671SE/D2aNNrI/X5mX9GTnasjtt508fZ0Fiyd3b3OGedERJYUK5HSKxyiDg==",
   "success": true,
   "projectFilePath": "C:\\Users\\bruli\\source\\repos\\VerteMarkPackager\\VerteMarkPackager\\VerteMarkPackager.csproj",
   "expectedPackageFiles": [
@@ -43,6 +43,7 @@
     "C:\\Users\\bruli\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\bruli\\.nuget\\packages\\runtime.win7-x64.runtime.native.system.data.sqlclient.sni\\4.3.0\\runtime.win7-x64.runtime.native.system.data.sqlclient.sni.4.3.0.nupkg.sha512",
     "C:\\Users\\bruli\\.nuget\\packages\\runtime.win7-x86.runtime.native.system.data.sqlclient.sni\\4.3.0\\runtime.win7-x86.runtime.native.system.data.sqlclient.sni.4.3.0.nupkg.sha512",
+    "C:\\Users\\bruli\\.nuget\\packages\\sharpziplib\\1.4.2\\sharpziplib.1.4.2.nupkg.sha512",
     "C:\\Users\\bruli\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\bruli\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\bruli\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
