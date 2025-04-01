@@ -1,5 +1,5 @@
 # VerteMarkPackager
- Packager .vmk souborů pro VerteMark.
+ Packager .vmk souborů pro [VerteMark](https://github.com/hnklp/VerteMark).
 
 ### Autoři
 
