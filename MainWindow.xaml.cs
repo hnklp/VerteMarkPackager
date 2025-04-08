@@ -93,10 +93,10 @@ namespace VerteMarkPackager {
 		}
 
 		private void InfoMenuItem_Click(object sender, RoutedEventArgs e) {
-			string infoText = "Tato aplikace slouží pro vytvoření souborů se správnou strukturou a koncovkou pro správné pracování aplikace VerteMark.\n\n" +
-										 "Z adresáře, kde se nacházejí soubory typu \"Dicom\" vytvoří soubory pro aplikaci VerteMark obsahující určitý počet souborů \"Dicom\". " +
-										 "Tyto vytvořené soubory se uloží v nové složce s názvem 'VerteMarkPack' v adresáři, který si uživatel zvolí.\n\n" +
-										 "V případě chyb, nesprávné práce aplikace nebo podrobnější nápovědy, prosím kontaktujte vývojáře této aplikace skrze email: schonf.alex@gmail.com.";
+			string infoText = "Tato aplikace slouží pro .vmk souborů.\n\n" +
+                                         "Z adresáře, kde se nacházejí soubory typu DICOM vytvoří soubory pro aplikaci VerteMark obsahující určitý počet souborů.\n\n" +
+										 "Tyto vytvořené soubory se uloží v nové složce s názvem 'VerteMarkPack' v adresáři, který si uživatel zvolí."
+										 ;
 			System.Windows.MessageBox.Show(infoText, "Informace", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
