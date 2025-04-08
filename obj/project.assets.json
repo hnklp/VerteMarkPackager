@@ -6660,19 +6660,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bruli\\.nuget\\packages\\": {}
+    "C:\\Users\\hynek\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bruli\\source\\repos\\VerteMarkPackager\\VerteMarkPackager\\VerteMarkPackager.csproj",
+      "projectUniqueName": "C:\\Users\\hynek\\Source\\Repos\\VerteMarkPackager\\VerteMarkPackager.csproj",
       "projectName": "VerteMarkPackager",
-      "projectPath": "C:\\Users\\bruli\\source\\repos\\VerteMarkPackager\\VerteMarkPackager\\VerteMarkPackager.csproj",
-      "packagesPath": "C:\\Users\\bruli\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bruli\\source\\repos\\VerteMarkPackager\\VerteMarkPackager\\obj\\",
+      "projectPath": "C:\\Users\\hynek\\Source\\Repos\\VerteMarkPackager\\VerteMarkPackager.csproj",
+      "packagesPath": "C:\\Users\\hynek\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\hynek\\Source\\Repos\\VerteMarkPackager\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\bruli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\hynek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6697,7 +6702,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net6.0-windows7.0": {
@@ -6731,6 +6737,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.36, 6.0.36]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -6739,7 +6763,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -6748,7 +6772,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Balíček fo-dicom.Desktop 4.0.8 se místo cílové architektury projektu net6.0-windows7.0 obnovil pomocí .NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1. Balíček nemusí být plně kompatibilní s vaším projektem.",
+      "message": "Package 'fo-dicom.Desktop 4.0.8' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "fo-dicom.Desktop",
       "targetGraphs": [
         "net6.0-windows7.0"

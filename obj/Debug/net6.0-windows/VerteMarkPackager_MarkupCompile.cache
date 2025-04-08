@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\obj\Debug\net6.0-windows\
+C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\
 VerteMarkPackager
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\bruli\source\repos\VerteMarkPackager\VerteMarkPackager\App.xaml
-11407045341
+C:\Users\hynek\Source\Repos\VerteMarkPackager\App.xaml
+2-1671400824
 
-4318827197
-2191310471263
-MainWindow.xaml;
+5-1062758620
+219200559451
+AboutWindow.xaml;MainWindow.xaml;
 
 False
 

@@ -12,6 +12,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Nápověda" Click="HelpMenuItem_Click"/>
             <MenuItem Header="Informace" Click="InfoMenuItem_Click"/>
+            <MenuItem Header="O aplikaci" Click="AboutItem_Click"/>
         </Menu>
         
         <Grid Margin="128,20,128,20" Height="388">

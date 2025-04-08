@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using ICSharpCode.SharpZipLib.Zip;
 using FellowOakDicom;
+using VerteMarkPackager;
 
 namespace VerteMarkPackager {
 	public partial class MainWindow : Window {
@@ -57,7 +58,15 @@ namespace VerteMarkPackager {
 			}
 		}
 
-		private async void OnCreateButtonClick(object sender, RoutedEventArgs e) {
+        private void AboutItem_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow AboutWindow = new AboutWindow();
+
+            AboutWindow.Show();
+        }
+
+
+        private async void OnCreateButtonClick(object sender, RoutedEventArgs e) {
 			// Hide the CreateButton
 			CreateButton.Visibility = Visibility.Collapsed;
 

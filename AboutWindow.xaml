@@ -1,0 +1,25 @@
+﻿<Window x:Class="VerteMarkPackager.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VerteMarkPackager"
+        mc:Ignorable="d"
+        Title="O aplikaci" Height="350" Width="360">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="65,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"><Run Text="VerteMarkPackager "/><Run Language="en-gb" Text="2.0"/></TextBlock>
+
+        <Button x:Name="okButton" Click="okButton_Click" IsDefault="True" Content="OK" Margin="260,28,20,284" Height="22" Width="70" RenderTransformOrigin="0.411,0.075" Grid.ColumnSpan="2"/>
+
+        <!--<Image Margin="12,14,292,256" Source="/Resources/VMP.png" Stretch="Fill" RenderTransformOrigin="0.284,0.487"/>-->
+
+        <GroupBox Header="Autoři" FontSize="10" Margin="10,71,126,83" Background="White">
+            <StackPanel>
+                <Label Content="Alex Schönfelder - Hlavní autor" FontSize="10"/>
+                <Label Content="Hynek Půta - Dodatečné modifikace" FontSize="10"/>
+            </StackPanel>
+        </GroupBox>
+        <Label Content="Oddělení pro datovou analýzu a simulace UJEP&#10;2024 - 2025" HorizontalAlignment="Left" Margin="74,261,0,0" VerticalAlignment="Top" Width="217" FontSize="10" Height="44"/>
+        <Image Margin="15,265,273,12" Source="/Resources/ODAS.ico" Stretch="Fill"/>
+    </Grid>
+</Window>
