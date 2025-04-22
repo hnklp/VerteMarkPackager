@@ -11,7 +11,7 @@
 
         <Button x:Name="okButton" Click="okButton_Click" IsDefault="True" Content="OK" Margin="260,28,20,284" Height="22" Width="70" RenderTransformOrigin="0.411,0.075" Grid.ColumnSpan="2"/>
 
-        <!--<Image Margin="12,14,292,256" Source="/Resources/VMP.png" Stretch="Fill" RenderTransformOrigin="0.284,0.487"/>-->
+        <Image Margin="16,10,291,260" Source="/Resources/icon.png" Stretch="Fill" RenderTransformOrigin="0.284,0.487"/>
 
         <GroupBox Header="Autoři" FontSize="10" Margin="10,71,126,83" Background="White">
             <StackPanel>

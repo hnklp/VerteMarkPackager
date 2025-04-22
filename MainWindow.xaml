@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="VerteMarkPackager" Height="450" Width="800">
     <DockPanel>
-       
+
         <!-- Menu Bar -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Nápověda" Click="HelpMenuItem_Click"/>
             <MenuItem Header="Informace" Click="InfoMenuItem_Click"/>
             <MenuItem Header="O aplikaci" Click="AboutItem_Click"/>
         </Menu>
-        
+
         <Grid Margin="128,20,128,20" Height="388">
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="70"/>
@@ -30,7 +30,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="Auto" MinWidth="105"/>
             </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="395,21,0,42">2.0</TextBlock>
             <TextBlock HorizontalAlignment="Center" FontSize="30" Grid.ColumnSpan="2">VerteMarkPackager</TextBlock>
+
             <!-- DICOM Files Directory Selection -->
             <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Height="16">Adresář s DICOM soubory:</TextBlock>
             <TextBox x:Name="DicomFilesDirectoryTextBox" Grid.Row="1" Grid.Column="0" Margin="49,0,10,0" VerticalAlignment="Center" Height="18"/>

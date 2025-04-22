@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VerteMarkPackager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b12305307af5bacc54b7043f6b144d293c88045")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c531601bb39bb1d0e5c28a308b04a4f19a99108a")]
 [assembly: System.Reflection.AssemblyProductAttribute("VerteMarkPackager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VerteMarkPackager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

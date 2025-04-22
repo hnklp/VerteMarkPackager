@@ -86,3 +86,4 @@ C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\VerteMark
 C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\ref\VerteMarkPackager.dll
 C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\AboutWindow.g.cs
 C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\AboutWindow.baml
+C:\Users\hynek\Source\Repos\VerteMarkPackager\obj\Debug\net6.0-windows\VerteMarkPackager_Content.g.cs
