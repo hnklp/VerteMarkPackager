@@ -65,6 +65,10 @@ namespace VerteMarkPackager {
             AboutWindow.Show();
         }
 
+        private void ReportItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show("Nalezli jste chybu v aplikaci?" + "\n" + "Napište nám prosím mail na software@digitech.ujep.cz" + "\n" + "\n" + "Jako předmět uveďte BUG - VMKPackager Krátký popis chyby" + "\n" + "Do zprávy napište podrobný popis chyby a pokud víte, tak postup jak ji můžeme zreplikovat." + "\n" + "\n" + "Děkujeme za spolupráci!", "Nahlásit chybu");
+        }
 
         private async void OnCreateButtonClick(object sender, RoutedEventArgs e) {
 			// Hide the CreateButton
